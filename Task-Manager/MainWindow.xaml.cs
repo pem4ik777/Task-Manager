@@ -23,6 +23,7 @@ namespace Task_Manager
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }
