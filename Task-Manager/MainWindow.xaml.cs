@@ -24,6 +24,14 @@ namespace Task_Manager
         {
             InitializeComponent();
 
+            Tasks ds = new Tasks("Задача о добавлении библиотеки в проект", "Суть задачи заключается в том, что нужно наконец-то добавить библиотеку в проект",DateTime.Now,DateTime.Now.AddDays(7),6);
+            DataBase ss = new DataBase();
+             ss.AddTask(ds);
+             ss.AddTask(ds);
+            ss.AddTask(ds);
+            var TestTask = new Tasks(3);
+            ss.DeleteTask(TestTask);
+             ss.DeleteTask(ds);
         }
     }
 }
