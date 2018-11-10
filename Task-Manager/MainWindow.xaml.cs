@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataBase;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +25,21 @@ namespace Task_Manager
         public MainWindow()
         {
             InitializeComponent();
+            MyTask Firts = new MyTask();
+            Firts.Name = "Имя";
+            Firts.Description = "Описание";
+            Firts.StartDate = DateTime.Now;
+            Firts.EndDate = DateTime.Now.AddDays(7);
+        
+            DataBase DataBaseCon = new DataBase();
+             DataBaseCon.AddTask(Firts);
+             DataBaseCon.AddTask(Firts);
 
-            Tasks ds = new Tasks("Задача о добавлении библиотеки в проект", "Суть задачи заключается в том, что нужно наконец-то добавить библиотеку в проект",DateTime.Now,DateTime.Now.AddDays(7),6);
-            DataBase ss = new DataBase();
-             ss.AddTask(ds);
-             ss.AddTask(ds);
-            ss.AddTask(ds);
-            var TestTask = new Tasks(3);
-            ss.DeleteTask(TestTask);
-             ss.DeleteTask(ds);
+            MyTask Second = new MyTask();
+            Second.TaskId = 1;
+
+            DataBaseCon.DeleteTask(Second);
+         
         }
     }
 }
