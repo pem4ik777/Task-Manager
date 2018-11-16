@@ -8,8 +8,8 @@ namespace DataBase
 {
     interface IDataBase
     {
-        bool AddTask(MyTask NewTask);
-        bool DeleteTask(MyTask NewTask);
-        bool Update(MyTask NewTask);
+        void AddTask(MyTask newTask);
+        void DeleteTask(MyTask newTask);
+        void Update(MyTask newTask);
     }
 }

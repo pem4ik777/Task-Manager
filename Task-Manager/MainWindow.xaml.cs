@@ -1,19 +1,8 @@
 ﻿using DataBase;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Task_Manager
 {
@@ -25,21 +14,23 @@ namespace Task_Manager
         public MainWindow()
         {
             InitializeComponent();
-            MyTask Firts = new MyTask();
-            Firts.Name = "Имя";
-            Firts.Description = "Описание";
-            Firts.StartDate = DateTime.Now;
-            Firts.EndDate = DateTime.Now.AddDays(7);
-        
-            DataBase DataBaseCon = new DataBase();
-             DataBaseCon.AddTask(Firts);
-             DataBaseCon.AddTask(Firts);
+            MyTask superTask = new MyTask()
+            {
+                Name = "Новая задача",
+                Description = "Описание задачи",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(7),
+            };
 
-            MyTask Second = new MyTask();
-            Second.TaskId = 1;
 
-            DataBaseCon.DeleteTask(Second);
-         
+            var connectionStr = Path.Combine(Environment.CurrentDirectory,
+                ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
+            DataBase.DataBase dataBaseCon = new DataBase.DataBase(connectionStr);
+
+            dataBaseCon.AddTask(superTask);
+            dataBaseCon.AddTask(superTask);
+            dataBaseCon.DeleteTask(superTask);
+
         }
     }
 }

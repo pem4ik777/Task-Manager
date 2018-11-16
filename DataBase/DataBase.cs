@@ -1,57 +1,54 @@
-﻿using DataBase;
+﻿using System.IO;
 using SQLite;
-using System;
-using System.Configuration;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
-namespace Task_Manager
+namespace DataBase
 {
     public class DataBase : IDataBase
     {
-        string connStr;
-        public DataBase()
+        private readonly string _connStr;
+        public DataBase(string connectionString)
         {
 
-            connStr = Path.Combine(Environment.CurrentDirectory, ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
+            _connStr = connectionString;
+            CreateDb();
+        }
+
+        public void AddTask(MyTask newTask)
+        {
+            using (var connection = new SQLiteConnection(_connStr))
+            {
+                connection.Insert(newTask);
+            }
 
         }
 
-        public bool AddTask(MyTask NewTask)
+
+        public void DeleteTask(MyTask newTask)
         {
-            using (var dbconnect = new SQLiteConnection(connStr))
+            using (var connection = new SQLiteConnection(_connStr))
             {
-                var r = dbconnect.GetTableInfo("MyTask");
-                if (r.Count == 0)
-                {
-                    dbconnect.CreateTable<MyTask>(CreateFlags.ImplicitPK | CreateFlags.AutoIncPK);
-                }
-                dbconnect.Insert(NewTask);
+                connection.Delete(newTask);
             }
-            return true;
+
         }
 
-
-        public bool DeleteTask(MyTask MyTask)
+        public void Update(MyTask newTask)
         {
-            using (var dbconnect = new SQLiteConnection(connStr))
+            using (var connection = new SQLiteConnection(_connStr))
             {
-                dbconnect.Delete(MyTask);
+                connection.Delete(newTask);
             }
-            return true;
+
         }
 
-        public bool Update(MyTask MyTask)
+        public void CreateDb()
         {
-            using (var dbconnect = new SQLiteConnection(connStr))
+            if (!File.Exists((_connStr)))
             {
-                dbconnect.Delete(MyTask);
+                var connection = new SQLiteConnection(_connStr);
+                connection.CreateTable<MyTask>();
+                connection.Close();
             }
-            return true;
         }
 
     }
