@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using SQLite;
 
 namespace DataBase
@@ -36,9 +38,21 @@ namespace DataBase
         {
             using (var connection = new SQLiteConnection(_connStr))
             {
-                connection.Delete(newTask);
+                connection.Update(newTask);
             }
 
+        }
+
+        public List<MyTask> GetResults(DateTime StartDate, DateTime EndDate, string Priority)
+        {
+            List<MyTask> resultTasks = new List<MyTask>();
+           
+            using (var connection = new SQLiteConnection(_connStr))
+            {
+                resultTasks = connection.Query<MyTask>("Select * from MyTask where StartDate BETWEEN ? AND ? AND Priority LIKE ?", StartDate, EndDate, Priority);
+            }
+
+            return resultTasks;
         }
 
         public void CreateDb()

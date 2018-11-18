@@ -11,5 +11,6 @@ namespace DataBase
         void AddTask(MyTask newTask);
         void DeleteTask(MyTask newTask);
         void Update(MyTask newTask);
+        List<MyTask> GetResults(DateTime StartDate, DateTime EndDate, string Priority);
     }
 }

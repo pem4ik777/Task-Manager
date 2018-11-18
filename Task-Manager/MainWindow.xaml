@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="Auto" Width="Auto">
+<Window.Resources>
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="10 0 0 0"></Setter>
+    </Style>
+</Window.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170"/>
+            
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+<StackPanel Orientation="Horizontal">
+    <Button Content="Add" Name ="Add" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
+    <Button Content="Delete" Name ="Delete" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" ></Button>
+            <Button Content="Change" Name ="Change" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
+        </StackPanel>
+        <Calendar Name="MyCalendar" Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="0" SelectionMode="MultipleRange" SelectedDatesChanged="Calendar_SelectedDatesChanged" />
+
+        <DataGrid Name="Table" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Bottom" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="Turquoise"></Setter>
+                    <Setter Property="FontWeight" Value="SemiBold"></Setter>
+                    <Setter Property="BorderThickness" Value="0,2,2,2"></Setter>
+                    <Setter Property="BorderBrush" Value="Black"></Setter>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGridTextColumn></DataGridTextColumn>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="id" Width="30" Binding="{Binding TaskId}" />
+                <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Width="Auto" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="StartDate" Width="Auto" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="EndDate" Width="Auto" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Priority" Width="Auto" Binding="{Binding Priority}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+      
     </Grid>
 </Window>
