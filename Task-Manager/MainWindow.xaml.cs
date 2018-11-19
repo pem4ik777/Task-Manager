@@ -12,8 +12,7 @@ namespace Task_Manager
     /// </summary>
     public partial class MainWindow
     {
-        SelectedDatesCollection dates;
-
+        Controller cont = new Controller();
         public MainWindow()
         {
             InitializeComponent();
@@ -34,8 +33,9 @@ namespace Task_Manager
             dataBaseCon.AddTask(superTask);
             dataBaseCon.AddTask(superTask);
             dataBaseCon.DeleteTask(superTask);
-           
-           
+            
+
+
         }
 
        
@@ -43,30 +43,24 @@ namespace Task_Manager
 
         enum PriorityValue
         {
+            All,
             Low,
             Medium,
             High
+               
+        }
+       
+  
+        private void Calendar1_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+            
+        cont.GetTasks(ref Calendar1,ref Table, CBpriority.SelectedItem.ToString());
         }
 
-       
-
-        private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        private void CBsort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             dates = MyCalendar.SelectedDates;
-            string connectionStr = Path.Combine(Environment.CurrentDirectory,
-                ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
-            DataBase.DataBase dataBaseCon = new DataBase.DataBase(connectionStr);
-
-           
-            var r = dataBaseCon.GetResults(dates[0].Date, dates[dates.Count-1].Date, "%");
-          
-                Table.Items.Clear();
-         
-            foreach (var item in r)
-            {
-                Table.Items.Add(item);
-            }
+            //Отобразить задачи с выбраным условием
         }
     }
 }

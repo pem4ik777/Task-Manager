@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task_Manager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="Auto">
-<Window.Resources>
-    <Style TargetType="Button">
-        <Setter Property="Margin" Value="10 0 0 0"></Setter>
-    </Style>
-</Window.Resources>
+        Title="MainWindow" Height="Auto" Width="600">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10 0 0 0"></Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,19 +19,50 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"/>
-            
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-<StackPanel Orientation="Horizontal">
-    <Button Content="Add" Name ="Add" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
-    <Button Content="Delete" Name ="Delete" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" ></Button>
-            <Button Content="Change" Name ="Change" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
-        </StackPanel>
-        <Calendar Name="MyCalendar" Width="Auto" Height="Auto" Grid.Column="1" Grid.Row="0" SelectionMode="MultipleRange" SelectedDatesChanged="Calendar_SelectedDatesChanged" />
+        <StackPanel Orientation="Horizontal">
 
-        <DataGrid Name="Table" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Bottom" Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Button Content="Add" Name ="Add" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
+            <Button Content="Delete" Name ="Delete" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" ></Button>
+            <Button Content="Change" Name ="Change" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
+            <Label Name="LselectPriority" Content="Select Priority" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,-5,0,0" Grid.Row="0"></Label>
+            <ComboBox Name="CBpriority" Height="Auto" Width="Auto"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,-5,0,0"  Grid.Row="0">
+                <ComboBoxItem IsSelected="True">
+                    <TextBlock Name="All" Text="All"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                <TextBlock Name="Low" Text="Low" />
+                    </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Name="Medium" Text="Medium"/>
+                    </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Name="High" Text="High"/>
+                    </ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="0" Grid.Column="0">
+            <Label Name="Lsort" Content="Sort By" Width="Auto" Height="Auto"></Label>
+            <ComboBox Name="CBsort" Height="Auto" Width="Auto" SelectionChanged="CBsort_SelectionChanged">
+                <ComboBoxItem IsSelected="True">
+                    <TextBlock>Date: New</TextBlock>
+                </ComboBoxItem>
+                <TextBlock>Date: Old</TextBlock>
+            </ComboBox>
+        </StackPanel>
+
+
+
+
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+            <Calendar SelectionMode="MultipleRange" Name="Calendar1" SelectedDatesChanged="Calendar1_SelectedDatesChanged"></Calendar>
+        </StackPanel>
+        <DataGrid Name="Table" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"  Height="Auto" Width="590" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="Turquoise"></Setter>
@@ -44,14 +75,14 @@
             <DataGridTextColumn></DataGridTextColumn>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="id" Width="30" Binding="{Binding TaskId}" />
-                <DataGridTextColumn Header="Name" Width="Auto" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Description" Width="Auto" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="StartDate" Width="Auto" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="EndDate" Width="Auto" Binding="{Binding EndDate}"/>
-                <DataGridTextColumn Header="Priority" Width="Auto" Binding="{Binding Priority}"/>
+                <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Width="240" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="StartDate" Width="70" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="EndDate" Width="70" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Priority" Width="*" Binding="{Binding Priority}"/>
             </DataGrid.Columns>
         </DataGrid>
 
-      
+
     </Grid>
 </Window>
