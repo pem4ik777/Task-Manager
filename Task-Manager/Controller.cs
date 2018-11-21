@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using DataBase;
 
 namespace Task_Manager
 {
@@ -24,6 +27,51 @@ namespace Task_Manager
             foreach (var item in r)
             {
                   Table.Items.Add(item);
+            }
+        }
+
+
+        public void SortTasks(ref DataGrid Table, ref ComboBox CBsort)
+        {
+            var itemsCollection = Table.Items;
+            List<MyTask> collectionTasks = new List<MyTask>();
+            ComboBoxItem typeItem = (ComboBoxItem)CBsort.SelectedItem;
+           
+
+            foreach (var item in itemsCollection)
+            {
+                collectionTasks.Add(item as MyTask);
+            }
+
+            switch (typeItem.Content.ToString())
+            {
+                case "Date: New(upper)":
+                    collectionTasks.Sort((a, b) => b.StartDate.CompareTo(a.StartDate));
+                    break;
+                case "Date: Old(upper)":
+                    collectionTasks.Sort((a, b) => a.StartDate.CompareTo(b.StartDate));
+                    break;
+                case "Date: New(upper) + Priority(More)":
+                    collectionTasks.OrderBy(x => x.StartDate).ThenBy(y => y.Priority);
+                    break;
+                case "Date: New(upper) + Priority(less)":
+                    collectionTasks.OrderBy(x => x.StartDate).ThenBy(y => y.Priority);
+                    break;
+                case "Date: Old(upper) + Priority(More)":
+                    break;
+                case "Date: Old(upper) + Priority(less)":
+                    break;
+                default:
+                    return;
+            }
+
+          
+
+            Table.Items.Clear();
+
+            foreach (var task in collectionTasks)
+            {
+                Table.Items.Add(task);
             }
         }
     }

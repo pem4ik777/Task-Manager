@@ -1,5 +1,6 @@
 ﻿using DataBase;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Windows;
@@ -53,14 +54,12 @@ namespace Task_Manager
   
         private void Calendar1_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            
         cont.GetTasks(ref Calendar1,ref Table, CBpriority.SelectedItem.ToString());
         }
 
         private void CBsort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Отобразить задачи с выбраным условием
+            cont.SortTasks(ref Table,ref CBsort);
         }
     }
 }

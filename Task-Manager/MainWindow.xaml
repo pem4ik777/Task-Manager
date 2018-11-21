@@ -48,10 +48,10 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="0" Grid.Column="0">
             <Label Name="Lsort" Content="Sort By" Width="Auto" Height="Auto"></Label>
             <ComboBox Name="CBsort" Height="Auto" Width="Auto" SelectionChanged="CBsort_SelectionChanged">
-                <ComboBoxItem IsSelected="True">
-                    <TextBlock>Date: New</TextBlock>
+                <ComboBoxItem IsSelected="False">
                 </ComboBoxItem>
-                <TextBlock>Date: Old</TextBlock>
+                <ComboBoxItem Name="New" Content="Date: New(upper)"></ComboBoxItem>
+                <ComboBoxItem Name="Old" Content="Date: Old(upper)"></ComboBoxItem>
             </ComboBox>
         </StackPanel>
 
