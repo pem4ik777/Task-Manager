@@ -66,6 +66,7 @@
     <Compile Include="DataBase.cs" />
     <Compile Include="IDataBase.cs" />
     <Compile Include="MyTask.cs" />
+    <Compile Include="PriorityValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

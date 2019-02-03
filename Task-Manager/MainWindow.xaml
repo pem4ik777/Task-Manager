@@ -4,17 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="600">
+        Title="MainWindow" Height="Auto" Width="636.247">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10 0 0 0"></Setter>
+            <Setter Property="Margin" Value="0 0 0 0"></Setter>
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -22,35 +22,39 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="10">
 
-            <Button Content="Add" Name ="Add" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
-            <Button Content="Delete" Name ="Delete" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" ></Button>
-            <Button Content="Change" Name ="Change" Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0"></Button>
-            <Label Name="LselectPriority" Content="Select Priority" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,-5,0,0" Grid.Row="0"></Label>
-            <ComboBox Name="CBpriority" Height="Auto" Width="Auto"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,-5,0,0"  Grid.Row="0">
-                <ComboBoxItem IsSelected="True">
-                    <TextBlock Name="All" Text="All"/>
+            <Button Content="Add" Name ="Add" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
+            <Button Content="Delete" Name ="Delete" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Button>
+            <Button Content="Change" Name ="Change" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Button>
+            <Label Name="LselectPriority" Content="Select Priority" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0"></Label>
+            <ComboBox Name="CBpriority" Height="Auto" Width="Auto"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
+                <ComboBoxItem IsSelected="True" Name="All" >
+                    <TextBlock Text="All"/>
                 </ComboBoxItem>
-                <ComboBoxItem>
-                <TextBlock Name="Low" Text="Low" />
-                    </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Name="Medium" Text="Medium"/>
-                    </ComboBoxItem>
-                <ComboBoxItem>
-                    <TextBlock Name="High" Text="High"/>
-                    </ComboBoxItem>
+                <ComboBoxItem Name="Low">
+                    <TextBlock Text="Low"/>
+                </ComboBoxItem>
+                <ComboBoxItem Name="Medium" >
+                    <TextBlock Text="Medium"/>
+                </ComboBoxItem>
+                <ComboBoxItem Name="High">
+                    <TextBlock Text="High"/>
+                </ComboBoxItem>
             </ComboBox>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="0" Grid.Column="0">
-            <Label Name="Lsort" Content="Sort By" Width="Auto" Height="Auto"></Label>
-            <ComboBox Name="CBsort" Height="Auto" Width="Auto" SelectionChanged="CBsort_SelectionChanged">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.Row="0" Grid.Column="0">
+            <Label Name="Lsort" Content="Sort By" Width="Auto" Height="Auto" Margin="0,10,0,0"></Label>
+            <ComboBox Name="CBsort" Height="Auto" Width="Auto" Margin="0,10,0,0" SelectionChanged="CBsort_SelectionChanged">
                 <ComboBoxItem IsSelected="False">
                 </ComboBoxItem>
                 <ComboBoxItem Name="New" Content="Date: New(upper)"></ComboBoxItem>
                 <ComboBoxItem Name="Old" Content="Date: Old(upper)"></ComboBoxItem>
+                <ComboBoxItem Name="LowP" Content="Priority: Low(upper)"></ComboBoxItem>
+                <ComboBoxItem Name="HighP" Content="Priority: High(upper)"></ComboBoxItem>
+                <ComboBoxItem Name="NewPriority" Content="Date: New(upper) + Priority(More)"></ComboBoxItem>
+                <ComboBoxItem Name="OldPriority" Content="Date: Old(upper) + Priority(More)"></ComboBoxItem>
             </ComboBox>
         </StackPanel>
 
@@ -58,10 +62,12 @@
 
 
 
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
-            <Calendar SelectionMode="MultipleRange" Name="Calendar1" SelectedDatesChanged="Calendar1_SelectedDatesChanged"></Calendar>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Calendar SelectionMode="MultipleRange" Name="Calendar1" Height="Auto" Width="Auto" SelectedDatesChanged="Calendar1_SelectedDatesChanged"></Calendar>
         </StackPanel>
-        <DataGrid Name="Table" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"  Height="Auto" Width="590" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+
+        <DataGrid Name="Table" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch"    Grid.Row="1"  Grid.ColumnSpan="2"
+                  Grid.Column="0">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Background" Value="Turquoise"></Setter>
@@ -71,17 +77,18 @@
                 </Style>
             </DataGrid.Resources>
 
-            <DataGridTextColumn></DataGridTextColumn>
+
+            
             <DataGrid.Columns>
-                <DataGridTextColumn Header="id" Width="30" Binding="{Binding TaskId}" />
-                <DataGridTextColumn Header="Name" Width="100" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Description" Width="240" Binding="{Binding Description}"/>
-                <DataGridTextColumn Header="StartDate" Width="70" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="EndDate" Width="70" Binding="{Binding EndDate}"/>
-                <DataGridTextColumn Header="Priority" Width="*" Binding="{Binding Priority}"/>
+                <DataGridTextColumn Header="id" Width="30*" Binding="{Binding TaskId}" />
+                <DataGridTextColumn Header="Name" Width="100*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Description" Width="240*" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="StartDate" Width="70*" Binding="{Binding StartDate, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTextColumn Header="EndDate" Width="70*" Binding="{Binding EndDate,StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTextColumn Header="Priority" Width="50*" Binding="{Binding Priority}"/>
             </DataGrid.Columns>
         </DataGrid>
-
-
     </Grid>
+
+
 </Window>

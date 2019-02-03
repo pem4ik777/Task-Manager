@@ -43,13 +43,21 @@ namespace DataBase
 
         }
 
-        public List<MyTask> GetResults(DateTime StartDate, DateTime EndDate, string Priority)
+        public List<MyTask> GetResults(DateTime startDate, DateTime endDate, PriorityValue priority)
         {
-            List<MyTask> resultTasks = new List<MyTask>();
+            List<MyTask> resultTasks;
 
             using (var connection = new SQLiteConnection(_connStr))
             {
-                resultTasks = connection.Query<MyTask>("Select * from MyTask where StartDate BETWEEN ? AND ? AND Priority LIKE ?", StartDate, EndDate, Priority);
+                if (priority == PriorityValue.All)
+                {
+                    resultTasks = connection.Table<MyTask>().Where(x => x.StartDate >= startDate && x.StartDate <= endDate).ToList();
+                }
+                else
+                {
+                    resultTasks = connection.Table<MyTask>().Where(x => x.StartDate >= startDate && x.StartDate <= endDate && x.Priority == priority).ToList();
+                }
+            
             }
 
             return resultTasks;

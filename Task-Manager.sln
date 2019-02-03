@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task-Manager", "Task-Manager\Task-Manager.csproj", "{611A70F2-0E4E-41B9-B45B-7FAC40A0F1CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{54E7C42D-F9F6-400D-A6A7-E70FD5378B75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{74CF3EA2-0C0D-4A7D-AF9A-61EA332D81A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{54E7C42D-F9F6-400D-A6A7-E70FD5378B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54E7C42D-F9F6-400D-A6A7-E70FD5378B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54E7C42D-F9F6-400D-A6A7-E70FD5378B75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74CF3EA2-0C0D-4A7D-AF9A-61EA332D81A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74CF3EA2-0C0D-4A7D-AF9A-61EA332D81A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74CF3EA2-0C0D-4A7D-AF9A-61EA332D81A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74CF3EA2-0C0D-4A7D-AF9A-61EA332D81A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16F02111-1F19-4338-941B-B867DC8657F1}
 	EndGlobalSection
 EndGlobal
