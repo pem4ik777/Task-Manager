@@ -2,6 +2,7 @@
 using System;
 using System.Configuration;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Controls;
 
 namespace Task_Manager
@@ -12,45 +13,14 @@ namespace Task_Manager
     public partial class MainWindow
     {
         private Controller cont = new Controller();
+        TaskWindow window = new TaskWindow();
+        public static string connectionStr = Path.Combine(Environment.CurrentDirectory,
+            ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
+       
+
         public MainWindow()
         {
             InitializeComponent();
-            MyTask superTask = new MyTask()
-            {
-                Name = "Medium",
-                Description = "Описание задачи",
-                StartDate = DateTime.Now.Date.AddDays(1),
-                EndDate = DateTime.Now.Date.AddDays(7),
-                Priority = PriorityValue.Medium
-            };
-
-            MyTask superTask1 = new MyTask()
-            {
-                Name = "High",
-                Description = "Описание задачи",
-                StartDate = DateTime.Now.Date.AddDays(1),
-                EndDate = DateTime.Now.Date.AddDays(7),
-                Priority = PriorityValue.High
-            };
-            MyTask superTask2 = new MyTask()
-            {
-                Name = "Low",
-                Description = "Описание задачи",
-                StartDate = DateTime.Now.Date.AddDays(1),
-                EndDate = DateTime.Now.Date.AddDays(7),
-                Priority = PriorityValue.Low
-            };
-
-            string connectionStr = Path.Combine(Environment.CurrentDirectory,
-                ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString);
-            DataBase.DataBase dataBaseCon = new DataBase.DataBase(connectionStr);
-
-            dataBaseCon.AddTask(superTask);
-            dataBaseCon.AddTask(superTask1);
-            dataBaseCon.AddTask(superTask2);
-
-
-
         }
 
         private void Calendar1_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -64,6 +34,30 @@ namespace Task_Manager
         private void CBsort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cont.SortTasks(ref Table, ref CBsort);
+        }
+
+        private void Add_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            window.Show();
+        }
+
+        private void Delete_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataBase.DataBase dataBaseCon = new DataBase.DataBase(connectionStr);
+            var items = Table.SelectedItems;
+            /*
+
+            Разобраться с этой херней
+
+    */
+            foreach (var item in items)
+            {
+                var b = (MyTask)item;
+                dataBaseCon.DeleteTask(b);
+                Table.SelectedItems.Remove(item);
+            }
+
+            Table.UpdateLayout();
         }
     }
 }

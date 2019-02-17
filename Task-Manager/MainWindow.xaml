@@ -24,8 +24,8 @@
 
         <StackPanel Orientation="Horizontal" Margin="10">
 
-            <Button Content="Add" Name ="Add" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"></Button>
-            <Button Content="Delete" Name ="Delete" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Button>
+            <Button Content="Add" Name ="Add" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Add_Click"></Button>
+            <Button Content="Delete" Name ="Delete" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" Click="Delete_Click"></Button>
             <Button Content="Change" Name ="Change" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0"></Button>
             <Label Name="LselectPriority" Content="Select Priority" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0"></Label>
             <ComboBox Name="CBpriority" Height="Auto" Width="Auto"  VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">

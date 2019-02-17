@@ -31,7 +31,7 @@
         <TextBox Name="TEndDate" Width="100" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" ></TextBox>
         <TextBox Name="TPriority" Width="100" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1"></TextBox>
         
-        <Button Name="BApply" Width="75" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5"  Grid.Column="0" Content="Apply"></Button>
-        <Button Name="BCancel" Width="75" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" Content="Cancel"></Button>
+        <Button Name="BApply" Width="75" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5"  Grid.Column="0" Content="Apply" Click="BApply_Click"></Button>
+        <Button Name="BCancel" Width="75" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" Content="Cancel" Click="BCancel_Click"></Button>
 </Grid>
 </Window>
